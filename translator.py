@@ -48,15 +48,10 @@ def translate(lines):
                 tokens = line.strip().split(' ')
                 tokens = [token.strip() for token in tokens if len(token.strip()) > 0]
 
-                #print(tokens)
-                #print(commands.get(tokens[0]))
-
                 if commands.get(tokens[0]) is None:
                     sys.exit(-1)
                 elif commands[tokens[0]][1] != len(tokens) - 1:
                     sys.exit(-1)
-
-                #print(tokens)
 
                 command_code = [commands[tokens[0]][0], 0, 0, 0]
 
