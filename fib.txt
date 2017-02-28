@@ -1,0 +1,18 @@
+[00] : IR = 28
+[04] : BR = 1
+[08] : AX = 1
+[12] : BX = 1
+[16] : CX = 0
+[20] : IT = 2
+[24] : IN = 0
+INP IN
+CMPLE IN IT
+CJUMP 64
+MV CX BX
+MV BX AX
+MV AX CX
+ADD AX BX
+INC IT
+JUMP 32
+OUT AX
+STOP
