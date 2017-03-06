@@ -2,10 +2,9 @@ import sys
 import json
 import os
 import mmap
-import struct
+
 
 block_size = 4
-
 commands_by_number = {}
 
 
@@ -31,13 +30,13 @@ def INC(file_in_map, instruction_ptr, first_param, second_param):
 
 
 def INP(file_in_map, instruction_ptr, first_param, second_param):
-    file_in_map[first_param: first_param + block_size] = struct.pack('>I', int(input('Enter natural number: ')))
+    file_in_map[first_param: first_param + block_size] = struct.pack('>I', int(input()))
     file_in_map[0: block_size] = struct.pack('>I', instruction_ptr + block_size)
     return True
 
 
 def OUT(file_in_map, instruction_ptr, first_param, second_param):
-    print('Fib =', struct.unpack('>I', file_in_map[first_param: first_param + block_size])[0])
+    print(struct.unpack('>I', file_in_map[first_param: first_param + block_size])[0])
     file_in_map[0: block_size] = struct.pack('>I', instruction_ptr + block_size)
     return True
 
@@ -89,7 +88,7 @@ if __name__ == '__main__':
 
     file_size = os.path.getsize(sys.argv[1])
     file_on_disk = os.open(sys.argv[1], os.O_RDWR)
-    file_in_map = mmap.mmap(file_on_disk, file_size, mmap.ACCESS_WRITE)
+    file_in_memory = mmap.mmap(file_on_disk, file_size, mmap.ACCESS_WRITE)
 
     with open('commands.json') as command_file:
         commands_serialized = command_file.read()
@@ -98,5 +97,5 @@ if __name__ == '__main__':
     for command in commands.items():
         commands_by_number[command[1][0]] = (command[0], command[1][1])
 
-    interprete(file_in_map)
-    file_in_map.close()
+    interprete(file_in_memory)
+    file_in_memory.close()
