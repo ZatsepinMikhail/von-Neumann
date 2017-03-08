@@ -1,18 +1,58 @@
 [00] : IR = 28
 [04] : BR = 1
-[08] : AX = 1
-[12] : BX = 1
-[16] : CX = 0
-[20] : IT = 2
-[24] : IN = 0
+[08] : TP = 1024
+[12] : SE = 2048 //stack end
+[16] : VS = 0 //result storage(1)
+[20] : NS = 0 //n storage
+[24] : CS1 = 1 //constant storage(1)
+[28] : CS2 = 2 //constant storage(2)
+[32] : AS = 2 //address storage
+[36] : IN = 0
 INP IN
-CMPLE IN IT
-CJUMP 64
-MV CX BX
-MV BX AX
-MV AX CX
-ADD AX BX
-INC IT
-JUMP 32
-OUT AX
+PUSH 0
+PUSH 60
+PUSH *IN
+JUMP 72
+MV VS *TP
+OUT VS
 STOP
+MV NS *TP
+CMPLE NS CS2
+CJUMP 204
+DEC NS
+PUSH 0
+PUSH 108
+PUSH *NS
+JUMP 72
+MV VS *TP
+POP
+MV NS *TP
+POP
+MV AS *TP
+POP
+PUSH *VS
+PUSH *AS
+PUSH *NS
+DEC NS
+DEC NS
+PUSH 0
+PUSH 164
+PUSH *NS
+JUMP 72
+MV VS *TP
+POP
+POP
+MV AS *TP
+POP
+MV NS *TP
+POP
+ADD VS NS
+PUSH *VS
+JUMP *AS
+POP
+MV AS *TP
+POP
+POP
+PUSH *CS1
+JUMP *AS
+MALLOC SE

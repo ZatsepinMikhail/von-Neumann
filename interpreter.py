@@ -2,7 +2,7 @@ import sys
 import json
 import os
 import mmap
-
+import struct
 
 block_size = 4
 commands_by_number = {}
