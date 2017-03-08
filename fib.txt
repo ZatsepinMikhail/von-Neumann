@@ -1,12 +1,12 @@
 [00] : IR = 28
 [04] : BR = 1
 [08] : TP = 1024
-[12] : SE = 2048 //stack end
-[16] : VS = 0 //result storage(1)
-[20] : NS = 0 //n storage
-[24] : CS1 = 1 //constant storage(1)
-[28] : CS2 = 2 //constant storage(2)
-[32] : AS = 2 //address storage
+[12] : SE = 2048
+[16] : VS = 0
+[20] : NS = 0
+[24] : CS1 = 1
+[28] : CS2 = 2
+[32] : AS = 2
 [36] : IN = 0
 INP IN
 PUSH 0
@@ -55,4 +55,4 @@ POP
 POP
 PUSH *CS1
 JUMP *AS
-MALLOC SE
+MALLOC 2048
