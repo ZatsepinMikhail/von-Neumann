@@ -49,7 +49,7 @@ def translate(lines):
                 address = parse_address(line[:semicol_index])
                 name, value = parse_name_value(line[semicol_index + 1:])
                 name_to_address[name] = address
-                code_file.write(bytearray(struct.unpack(">4b", struct.pack(">I", value))))
+                code_file.write(bytearray(struct.pack(">I", value)))
             else:
                 tokens = line.strip().split(' ')
                 tokens = [token.strip() for token in tokens if len(token.strip()) > 0]
