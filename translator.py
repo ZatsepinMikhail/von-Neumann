@@ -12,6 +12,7 @@ commands = {'STOP': (0xff, 0),
             'CMPLE': (0x30, 2),
             'INP': (0x40, 1),
             'OUT': (0x41, 1),
+            'OUTC': (0x42, 1),
             'PUSH': (0x50, 1),
             'POP': (0x51, 0)}
 
@@ -43,7 +44,7 @@ def translate(lines):
         name_to_address = {}
 
         for line_index, line in enumerate(lines):
-            print(line_index)
+            print(line)
             semicol_index = line.find(':')
             if semicol_index != -1:
                 address = parse_address(line[:semicol_index])
@@ -80,12 +81,17 @@ def translate(lines):
                     if name_to_address.get(tokens[i]) is None:
                         if tokens[i].isdigit():
                             command_code[2 * i - 1] = int(tokens[i])
+                        elif tokens[0] == 'OUTC':
+                            print(tokens[i][1])
+                            print(ord(tokens[i][1]))
+                            command_code[2 * i - 1] = ord(tokens[i][1])
                         else:
                             print('ERROR: address is not a number')
                             sys.exit(-1)
                     else:
                         command_code[2 * i - 1] = name_to_address[tokens[i]]
 
+                print(command_code)
                 code_file.write(bytearray(command_code))
 
         print(name_to_address)
