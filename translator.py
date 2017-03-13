@@ -42,7 +42,6 @@ def translate(lines):
 
     with open('code.il', 'wb+') as code_file:
         name_to_address = {}
-
         for line_index, line in enumerate(lines):
             print(line)
             semicol_index = line.find(':')

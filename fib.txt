@@ -1,13 +1,12 @@
-[00] : IR = 40
+[00] : IR = 36
 [04] : BR = 1
-[08] : TP = 260
-[12] : SE = 2048
-[16] : VS = 0
-[20] : NS = 0
-[24] : CS1 = 1
-[28] : CS2 = 2
-[32] : AS = 2
-[36] : IN = 0
+[08] : TP = 272
+[12] : VS = 0
+[16] : NS = 0
+[20] : CS1 = 1
+[24] : CS2 = 2
+[28] : AS = 2
+[32] : IN = 0
 OUTC 'e'
 OUTC 'n'
 OUTC 't'
@@ -18,20 +17,24 @@ OUTC 'n'
 OUTC 32
 INP IN
 PUSH 0
-PUSH 92
+PUSH 88
 PUSH *IN
-JUMP 104
+JUMP 116
 MV VS *TP
+OUTC 'f'
+OUTC 'i'
+OUTC 'b'
+OUTC 32
 OUT VS
 STOP
 MV NS *TP
 CMPLE NS CS2
-CJUMP 240
+CJUMP 252
 DEC NS
 PUSH 0
-PUSH 136
+PUSH 148
 PUSH *NS
-JUMP 104
+JUMP 116
 MV VS *TP
 POP
 MV NS *TP
@@ -45,9 +48,9 @@ PUSH *NS
 DEC NS
 DEC NS
 PUSH 0
-PUSH 200
+PUSH 212
 PUSH *NS
-JUMP 104
+JUMP 116
 MV VS *TP
 POP
 POP
